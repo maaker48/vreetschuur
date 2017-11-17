@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try{
                             JSONArray categories  = response.getJSONArray("categories");
-                            Log.d("jsonarray 50", response.getJSONArray("categories").toString());
+
                             for (int i = 0; i < categories.length(); i++) {
                                 menuItems.add(categories.get(i).toString());
                             }

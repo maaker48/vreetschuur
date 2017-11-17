@@ -114,7 +114,7 @@ public class Orders extends AppCompatActivity {
                             SharedPreferences.Editor editor = mPrefs.edit();
                             Gson gson = new Gson();
                             String json = gson.toJson(shoppingList);
-                            Log.d("saving list", json);
+
                             editor.putString("shoppingList", json);
                             editor.commit();
                             editor.apply();
@@ -153,20 +153,25 @@ public class Orders extends AppCompatActivity {
 
     private void refreshList(int position) {
         shoppingList.deleteItem(orderList.get(position));
-        orderList = shoppingList.getItems();
         adapter.remove(adapter.getItem(position));
+        orderList = shoppingList.getItems();
+
 
         Context context = getApplicationContext();
-        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.shared_res), MODE_PRIVATE).edit();
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(orderList);
+        String json = gson.toJson(shoppingList);
         editor.putString("shoppingList", json);
         editor.commit();
+        editor.apply();
+
         updateListView();
     }
 
     private void updateListView() {
         orderList = shoppingList.getItems();
+        orders = new ArrayList<>();
         totalMoney = 0;
 
         for(Item order: orderList) {

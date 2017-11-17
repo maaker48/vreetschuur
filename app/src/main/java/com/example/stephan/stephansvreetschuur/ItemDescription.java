@@ -74,7 +74,6 @@ public class ItemDescription extends AppCompatActivity {
             SharedPreferences.Editor editor = mPrefs.edit();
             Gson gson = new Gson();
             String json = gson.toJson(shoppingList);
-            Log.d("saving list", json);
             editor.putString("shoppingList", json);
             editor.commit();
             editor.apply();
@@ -105,7 +104,6 @@ public class ItemDescription extends AppCompatActivity {
         itemDesc.setText(selectedItem.description);
         itemPrice.setText(Integer.toString(selectedItem.price) +"\u20ac");
         itemName.setText(selectedItem.name);
-        Log.d("Image", selectedItem.image_url);
     }
 
     //https://stackoverflow.com/questions/18953632/how-to-set-image-from-url-for-imageview
